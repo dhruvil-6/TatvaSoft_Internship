@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Home from "./Pages/Home";
+import View from "./View";
+import About from "./About";
+import Contact from "./Contact";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+
+import AppWrapper from "./components/AppWrapper";
+import Navbar from "./components/Navbar";
+import SearchBar from "./components/SearchBar";
+import Footer from "./components/Footer";
+import MainNavigation from "./components/MainNavigation";
+import "./App.css";
+import "./assets/css/style.css";
+import { AuthWrapper } from "./context/auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import loader from "./assets/images/loader.gif";
+import { BrowserRouter, Route, Link, Routes} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+     <AuthWrapper>
+
+      <div className="loader-wrapper">
+        <img src={loader} alt="loader" />
+      </div>
+      <AppWrapper>
+        <Navbar />
+        <SearchBar />
+        <MainNavigation />
+        <ToastContainer />
+        <Footer />
+      </AppWrapper>
+     </AuthWrapper>
+    </BrowserRouter>
   );
 }
 
