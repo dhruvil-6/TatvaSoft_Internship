@@ -26,7 +26,7 @@ const loginSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email"),
   password: Yup.string()
     .min(6)
-    .required("Please enter password with min 6 characters"),
+    .required("Please enter password with min 6 char"),
 });
 const Login = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const Login = () => {
         authService.login(values).then((res) => {
           authContext.setUser(res);
           toast.success("Login successfully");
-          navigate("/book");
+          navigate("/");
         });
       },
     });

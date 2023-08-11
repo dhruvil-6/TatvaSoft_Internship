@@ -18,7 +18,7 @@ import { AuthWrapper } from "./context/auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loader from "./assets/images/loader.gif";
-import { BrowserRouter, Route, Link, Routes} from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes} from "react-router-dom";
 
 function App() {
   return (

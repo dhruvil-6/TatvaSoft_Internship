@@ -7,13 +7,13 @@ import logo from "../images/logo.svg";
 import Searchbar from "./Searchbar/Searchbar";
 import { useAuthContext } from "../context/auth";
 import shared from "../utils/shared";
-import cartIcon from "../images//cart.png";
+import cartIcon from "../images/cart.png";
 // import { useCartContext } from "../context/cart";
 // import { Button, List } from "@material-ui/core";
 
 const Header = () => {
   const authContext = useAuthContext();
-  const cartContext = useCartContext();
+  // const cartContext = useCartContext();
   const logOut = () => {
     authContext.signOut();
   };

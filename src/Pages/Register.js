@@ -12,11 +12,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import authService from "../service/auth-service";
 import { useNavigate } from "react-router-dom";
+
 const initialValues = {
   firstName: "",
   lastName: "",
   email: "",
-  roleId: 2,
+  roleId: 3,
   password: "",
   confirmPassword: "",
 };
@@ -30,9 +31,9 @@ const registerSchema = Yup.object({
   firstName: Yup.string()
     .min(2)
     .max(25)
-    .required("Please enter your First Name"),
-  lastName: Yup.string().min(2).max(25).required("Please enter your Last Name"),
-  email: Yup.string().email().required("Please enter your Email Id"),
+    .required("please enter your first name"),
+  lastName: Yup.string().min(2).max(25).required("please enter your last name"),
+  email: Yup.string().email().required("Please enter your email"),
   password: Yup.string()
     .min(6)
     .required("Please enter password with min 6 char"),
@@ -78,7 +79,7 @@ const Register = () => {
             style={{ fontWeight: 600 }}
             textAlign="center"
           >
-            Login Or Create An Account
+            Login or Create An Account
           </Typography>
           <Box>
             <Typography variant="h6" gutterBottom style={{ fontWeight: 600 }}>
