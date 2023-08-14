@@ -19,7 +19,7 @@ const ConfirmationDialog = (props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={() => onClose()} sx={{ color: "grey" }}>
-          Cancle
+          Cancel
         </Button>
         <Button
           onClick={() => {

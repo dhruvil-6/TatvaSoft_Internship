@@ -70,7 +70,7 @@ const EditBook = () => {
   } = useFormik({
     initialValues: initialValueState,
     validationSchema: bookSchema,
-
+    enableReinitialize: true,
     onSubmit: (values) => {
       bookService
         .save(values)
@@ -109,7 +109,7 @@ const EditBook = () => {
           throw error;
         };
       } else {
-        toast.error("only jpg,jpeg and png files are allowed");
+        toast.error("only jpg, jpeg and png type files are allowed");
       }
     } else {
       setFieldValue("base64image", "");
