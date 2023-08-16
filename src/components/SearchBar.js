@@ -3,9 +3,17 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import { List, ListItem, ListItemText, Stack, Typography } from "@mui/material";
+import {
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import bookService from "../service/cart-service";
 import { useEffect, useState } from "react";
 
@@ -33,8 +41,11 @@ const SearchBar = () => {
         onClick={() => {
           setOpenSearchResult(false);
           document.body.classList.remove("search-results-open");
+          setbookList([]);
+          setquery("");
         }}
       ></div>
+
       <Box
         sx={{
           height: "80px",
@@ -49,9 +60,9 @@ const SearchBar = () => {
       >
         <TextField
           type="text"
-          placeholder="What are you looking for ..."
+          placeholder="What are you looking for ....."
           size="small"
-          sx={{ width: "422px" }}
+          sx={{ width: "422px", zIndex: 20, backgroundColor: "#fafafa" }}
           value={query}
           onChange={(e) => setquery(e.target.value)}
         />
@@ -60,6 +71,7 @@ const SearchBar = () => {
           sx={{
             textTransform: "capitalize",
             backgroundColor: "#80bf32",
+            zIndex: 20,
             "&:hover": {
               backgroundColor: "#339933",
             },
@@ -79,6 +91,7 @@ const SearchBar = () => {
               width: "75%",
               zIndex: 2,
               borderRadius: "0.5rem",
+              boxShadow: 3,
             }}
           >
             {bookList?.length === 0 && (
@@ -89,19 +102,52 @@ const SearchBar = () => {
               {bookList?.length > 0 &&
                 bookList.map((item, i) => {
                   return (
-                    <ListItem sx={{ display: "flex" }} key={item.name}>
-                      <Stack sx={{ flexGrow: "1" }}>
+                    <ListItem
+                      sx={{
+                        display: "flex",
+                        gap: "10px",
+                        "&:hover": {
+                          backgroundColor: "#fef7e7",
+                        },
+                      }}
+                      key={item.name}
+                    >
+                      <img
+                        src={item.base64image}
+                        style={{ width: "3rem", height: "5rem" }}
+                      />
+
+                      <Box sx={{ flexGrow: "1" }}>
                         <Typography variant="h6">{item.name}</Typography>
                         <Typography variant="body1">
                           {item.description}
                         </Typography>
-                      </Stack>
-                      <Stack direction="row" spacing={4}>
-                        <Typography variant="h6">Rs. {item.price}</Typography>
-                        <Button variant="contained" onClick={() => {}}>
+                      </Box>
+
+                      <Box
+                        spacing={4}
+                        sx={{
+                          display: "flex",
+                          gap: "1rem",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Typography variant="h6"> ₹ {item.price}</Typography>
+                        <Button
+                          variant="contained"
+                          // onClick={() => {}}
+                          startIcon={<ShoppingCartIcon />}
+                          sx={{
+                            marginTop: "auto",
+                            backgroundColor: "#ea3c53",
+                            "&:hover": {
+                              backgroundColor: "#e60026",
+                            },
+                          }}
+                        >
                           Add to Cart
                         </Button>
-                      </Stack>
+                      </Box>
                     </ListItem>
                   );
                 })}

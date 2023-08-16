@@ -18,24 +18,23 @@ import { AuthWrapper } from "./context/auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loader from "./assets/images/loader.gif";
-import { BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
-     <AuthWrapper>
-
-      <div className="loader-wrapper">
-        <img src={loader} alt="loader" />
-      </div>
-      <AppWrapper>
-        <Navbar />
-        <SearchBar />
-        <MainNavigation />
-        <ToastContainer />
-        <Footer />
-      </AppWrapper>
-     </AuthWrapper>
+      <AuthWrapper>
+        <div className="loader-wrapper">
+          <img src={loader} alt="loader" />
+        </div>
+        <AppWrapper>
+          <Navbar />
+          <SearchBar />
+          <MainNavigation />
+          <ToastContainer />
+          <Footer />
+        </AppWrapper>
+      </AuthWrapper>
     </BrowserRouter>
   );
 }

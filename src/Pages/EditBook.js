@@ -109,7 +109,7 @@ const EditBook = () => {
           throw error;
         };
       } else {
-        toast.error("only jpg, jpeg and png type files are allowed");
+        toast.error("only jpg,jpeg and png files are allowed");
       }
     } else {
       setFieldValue("base64image", "");
@@ -271,7 +271,13 @@ const EditBook = () => {
               type="submit"
               variant="contained"
               color="success"
-              sx={{ textTransform: "capitalize" }}
+              sx={{
+                textTransform: "capitalize",
+                backgroundColor: "#80bf32",
+                "&:hover": {
+                  backgroundColor: "#339933",
+                },
+              }}
             >
               Save
             </Button>
