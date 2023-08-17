@@ -12,7 +12,7 @@ import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Shared from "../utils/shared";
-import bookService from "../service/cart-service";
+import bookService from "../service/book-service";
 import categoryService from "../service/category-service";
 
 const bookSchema = Yup.object().shape({

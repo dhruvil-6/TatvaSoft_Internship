@@ -1,24 +1,24 @@
 import Box from "@mui/material/Box";
-
+import { RoutePaths } from "../utils/enum";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import {
-  Container,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  Typography,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { List, ListItem, Typography } from "@mui/material";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import bookService from "../service/cart-service";
-import { useEffect, useState } from "react";
+import bookService from "../service/book-service";
+import { useState} from "react";
+import  {useNavigate} from "react-router-dom";
+import { useAuthContext } from "../context/auth";
+import { useCartContext } from "../context/cart";
+import Shared from "../utils/shared";
+import { toast } from "react-toastify";
 
 const SearchBar = () => {
-  const open = false;
+  const navigate = useNavigate();
+  const authContext = useAuthContext();
+  const cartContext = useCartContext();
+
   const [query, setquery] = useState("");
   const [bookList, setbookList] = useState([]);
   const [openSearchResult, setOpenSearchResult] = useState(false);
@@ -32,6 +32,22 @@ const SearchBar = () => {
     document.body.classList.add("search-results-open");
     searchBook();
     setOpenSearchResult(true);
+  };
+
+  const addToCart = (book) => {
+    if (!authContext.user.id) {
+      navigate(RoutePaths.Login);
+      toast.error("Please Login before adding the Books to the Cart");
+    } else {
+      Shared.addToCart(book, authContext.user.id).then((res) => {
+        if (res.error) {
+          toast.error(res.error);
+        } else {
+          toast.success("Item added in cart!");
+          cartContext.updateCart();
+        }
+      });
+    }
   };
 
   return (
@@ -60,7 +76,7 @@ const SearchBar = () => {
       >
         <TextField
           type="text"
-          placeholder="What are you looking for ....."
+          placeholder="What are you looking for ..."
           size="small"
           sx={{ width: "422px", zIndex: 20, backgroundColor: "#fafafa" }}
           value={query}
@@ -87,8 +103,8 @@ const SearchBar = () => {
             sx={{
               position: "absolute",
               top: "70px",
-              backgroundColor: "#dedede",
-              width: "75%",
+              backgroundColor: "#fafafa",
+              width: "65%",
               zIndex: 2,
               borderRadius: "0.5rem",
               boxShadow: 3,
@@ -116,14 +132,12 @@ const SearchBar = () => {
                         src={item.base64image}
                         style={{ width: "3rem", height: "5rem" }}
                       />
-
                       <Box sx={{ flexGrow: "1" }}>
                         <Typography variant="h6">{item.name}</Typography>
                         <Typography variant="body1">
                           {item.description}
                         </Typography>
                       </Box>
-
                       <Box
                         spacing={4}
                         sx={{
@@ -132,10 +146,11 @@ const SearchBar = () => {
                           alignItems: "center",
                         }}
                       >
-                        <Typography variant="h6"> ₹ {item.price}</Typography>
+                        <Typography variant="h6" sx={{ width: "100px" }}>
+                          ₹ {item.price}
+                        </Typography>
                         <Button
                           variant="contained"
-                          // onClick={() => {}}
                           startIcon={<ShoppingCartIcon />}
                           sx={{
                             marginTop: "auto",
@@ -144,6 +159,7 @@ const SearchBar = () => {
                               backgroundColor: "#e60026",
                             },
                           }}
+                          onClick={() => addToCart(item)}
                         >
                           Add to Cart
                         </Button>

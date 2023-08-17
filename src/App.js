@@ -15,6 +15,7 @@ import MainNavigation from "./components/MainNavigation";
 import "./App.css";
 import "./assets/css/style.css";
 import { AuthWrapper } from "./context/auth";
+import { CartWrapper } from "./context/cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loader from "./assets/images/loader.gif";
@@ -24,16 +25,18 @@ function App() {
   return (
     <BrowserRouter>
       <AuthWrapper>
-        <div className="loader-wrapper">
-          <img src={loader} alt="loader" />
-        </div>
-        <AppWrapper>
-          <Navbar />
-          <SearchBar />
-          <MainNavigation />
-          <ToastContainer />
-          <Footer />
-        </AppWrapper>
+        <CartWrapper>
+          <div className="loader-wrapper">
+            <img src={loader} alt="loader" />
+          </div>
+          <AppWrapper>
+            <Navbar />
+            <SearchBar />
+            <MainNavigation />
+            <ToastContainer />
+            <Footer />
+          </AppWrapper>
+        </CartWrapper>
       </AuthWrapper>
     </BrowserRouter>
   );

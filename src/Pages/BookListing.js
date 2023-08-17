@@ -1,5 +1,6 @@
 import BookCard from "../components/Book/BookCard";
-import bookService from "../service/cart-service";
+
+import bookService from "../service/book-service";
 import categoryService from "../service/category-service";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -98,7 +99,12 @@ const BookListing = () => {
 
   return (
     <Container maxWidth="lg" sx={{ paddingY: "1rem" }}>
-      <Typography variant="h3" sx={{ textAlign: "center" }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        style={{ fontWeight: 600 }}
+        textAlign="center"
+      >
         Book Listing
       </Typography>
 
@@ -133,13 +139,14 @@ const BookListing = () => {
             sx={{ width: "100%" }}
             onChange={sortBooks}
             value={sortBy}
+            displayEmpty
           >
+            <MenuItem value='' disabled>Sort By</MenuItem>
             <MenuItem value="a-z">A - Z</MenuItem>
             <MenuItem value="z-a">Z - A</MenuItem>
           </Select>
         </Grid>
         <Grid item md={2}>
-          {/*  !!!!!!!!!  Ye vala Select optional hai kripya copy na kare */}
           <Select
             size="small"
             sx={{ width: "100%" }}
@@ -162,14 +169,8 @@ const BookListing = () => {
       >
         {books.map((ele) => {
           return (
-            <Grid item sm={12} md={6} key={ele.name}>
-              <BookCard
-                name={ele.name}
-                price={ele.price}
-                category={ele.category}
-                description={ele.description}
-                img={ele.base64image}
-              />
+            <Grid item sm={12} md={6} key={`card-${ele.id}`}>
+              <BookCard book={ele} />
             </Grid>
           );
         })}

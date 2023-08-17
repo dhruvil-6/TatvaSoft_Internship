@@ -1,49 +1,50 @@
 import request from "./request";
 
-const ENDPOINT = "api/book";
+const ENDPOINT = "api/cart";
 
-const getAll = async (params) => {
+const add = async (data) => {
   const url = `${ENDPOINT}`;
-  return request.get(url, { params }).then((res) => {
-    return res;
-  });
+  return request
+    .post(url, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((e) => {
+      return Promise.reject(e.response);
+    });
 };
 
-const searchBook = async (searchText) => {
-  const url = `${ENDPOINT}/search?keyword=${searchText}`;
+const getList = async (id) => {
+  const url = `${ENDPOINT}?userId=${id}`;
   return request.get(url).then((res) => {
     return res;
   });
 };
 
-const getById = async (id) => {
-  const url = `${ENDPOINT}/byId?id=${id}`;
-  return request.get(url).then((res) => {
-    return res;
-  });
+const updateItem = async (data) => {
+  const url = `${ENDPOINT}`;
+  return request
+    .put(url, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((e) => {
+      return Promise.reject(e);
+    });
 };
 
-const deleteBook = async (id) => {
+const removeItem = async (id) => {
   const url = `${ENDPOINT}?id=${id}`;
-  return request.delete(url).then((res) => {
-    return res;
-  });
+  return request
+    .delete(url)
+    .then((res) => {
+      return res;
+    })
+    .catch((e) => {
+      return e;
+    });
 };
 
-const save = async (data) => {
-  if (data.id) {
-    const url = `${ENDPOINT}`;
-    return request.put(url, data).then((res) => {
-      return res;
-    });
-  } else {
-    const url = `${ENDPOINT}`;
-    return request.post(url, data).then((res) => {
-      return res;
-    });
-  }
-};
-
-const cartService = { getAll, getById, deleteBook, save, searchBook };
+const cartService = { add, getList, updateItem, removeItem };
 
 export default cartService;

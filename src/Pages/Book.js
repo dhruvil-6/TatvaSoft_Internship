@@ -1,5 +1,5 @@
 import ConfirmationDialog from "../components/ConfirmationDialog";
-import bookService from "../service/cart-service";
+import bookService from "../service/book-service";
 import categoryService from "../service/category-service";
 import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
@@ -17,6 +17,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+
 import { toast } from "react-toastify";
 import Shared from "../utils/shared";
 import { useNavigate } from "react-router-dom";
@@ -136,7 +137,7 @@ const Book = () => {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell align="center">{row.price}</TableCell>
+                <TableCell align="center">&#8377; {row.price}</TableCell>
                 <TableCell align="center">
                   {" "}
                   {categories.find((c) => c.id === row.categoryId)?.name}

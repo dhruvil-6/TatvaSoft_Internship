@@ -26,7 +26,7 @@ const loginSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email"),
   password: Yup.string()
     .min(6)
-    .required("Please enter password with min 6 char"),
+    .required("Please enter password with min 6 characters"),
 });
 const Login = () => {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Login = () => {
                 <ListItemIcon sx={{ width: "10px" }}>
                   <CircleIcon sx={{ color: "black", fontSize: "small" }} />
                 </ListItemIcon>
-                <ListItemText>View and track orers and more</ListItemText>
+                <ListItemText>View and track orders and more</ListItemText>
               </ListItem>
             </List>
             <Link to="/register" style={linkStyle}>

@@ -3,7 +3,6 @@ import { RoutePaths } from "../utils/enum";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Book from "../Pages/Book";
-import Home from "../Pages/Home";
 import User from "../Pages/User";
 import EditUser from "../Pages/EditUser";
 import BookListing from "../Pages/BookListing";
@@ -11,6 +10,7 @@ import Category from "../Pages/Category";
 import EditCategory from "../Pages/EditCategory";
 import Profile from "../Pages/Profile";
 import EditBook from "../Pages/EditBook";
+import Cart from "../Pages/Cart";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthContext } from "../context/auth";
 
@@ -23,7 +23,7 @@ const MainNavigation = () => {
     <Routes>
       <Route
         exact
-        path={RoutePaths.Home}
+        path={RoutePaths.BookListing}
         element={authContext.user.id ? <BookListing /> : Redirect}
       />
       <Route exact path={RoutePaths.Login} element={<Login />} />
@@ -77,6 +77,11 @@ const MainNavigation = () => {
         exact
         path={RoutePaths.UpdateProfile}
         element={authContext.user.id ? <Profile /> : Redirect}
+      />
+      <Route
+        exact
+        path={RoutePaths.Cart}
+        element={authContext.user.id ? <Cart /> : Redirect}
       />
     </Routes>
   );

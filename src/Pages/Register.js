@@ -6,7 +6,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { FormHelperText } from "@mui/material";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -23,23 +22,23 @@ const initialValues = {
 };
 
 const roleList = [
-  { id: 2, name: "buyer" },
-  { id: 3, name: "seller" },
+  { id: 2, name: "seller" },
+  { id: 3, name: "buyer" },
 ];
 
 const registerSchema = Yup.object({
   firstName: Yup.string()
     .min(2)
     .max(25)
-    .required("please enter your first name"),
-  lastName: Yup.string().min(2).max(25).required("please enter your last name"),
-  email: Yup.string().email().required("Please enter your email"),
+    .required("Please enter your First Name"),
+  lastName: Yup.string().min(2).max(25).required("Please enter your Last Name"),
+  email: Yup.string().email().required("Please enter your Email Id"),
   password: Yup.string()
     .min(6)
-    .required("Please enter password with min 6 char"),
+    .required("Please enter password with min 6 characters"),
   confirmPassword: Yup.string()
     .required()
-    .oneOf([Yup.ref("password"), null], "Password must match"),
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
   roleId: Yup.number().required("Role is required"),
 });
 
@@ -60,14 +59,6 @@ const Register = () => {
         });
       },
     });
-
-  // const onSubmit = (data) => {
-  //   delete data.confirmPassword;
-  //   authService.create(data).then((res) => {
-  //     navigate("/login");
-  //     toast.success("Successfully registered");
-  //   });
-  // };
 
   return (
     <Container maxWidth="lg" sx={{ margin: "1.5rem auto" }}>
